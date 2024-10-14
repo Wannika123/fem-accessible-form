@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "Karla";
+  src: url("/assets/fonts/Karla-VariableFont.woff2") format("woff2-variations");
+  font-weight: 100 1000;
+}
+
+:root {
+  --Light-Green: hsl(148, 38%, 91%);
+  --Medium-Green: hsl(169, 82%, 27%);
+  --Red: hsl(0, 66%, 54%);
+  --White: hsl(0, 0%, 100%);
+  --Medium-Grey: hsl(186, 15%, 59%);
+  --Dark-Grey: hsl(187, 24%, 22%);
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body { 
+  font-family: Karla;
+  background-color: var(--Light-Green);
+}
+
+main {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

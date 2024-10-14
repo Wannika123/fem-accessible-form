@@ -1,0 +1,126 @@
+.container {
+    width: 88%;
+    max-width: 46rem;
+    background-color: var(--White);
+    border-radius: 16px;
+    padding: 24px;
+    color: var(--Dark-Grey);
+    margin: 32px 0;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+form {
+    margin-top: 32px;
+}
+
+fieldset {
+    border: none;
+}
+
+.input-container {
+    margin-bottom: 24px;
+}
+
+input[type=text]:hover, 
+input[type=email]:hover,
+textarea:hover {
+    border-color: var(--Medium-Green);
+}
+
+input[type=text]:focus, 
+input[type=email]:focus,
+textarea:focus {
+    outline-color: var(--Medium-Green);
+}
+
+input, textarea {
+    cursor: pointer;
+}
+
+.label {
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.star {
+    color: var(--Medium-Green);
+}
+
+.err-message {
+    color: var(--Red);
+    font-size: 1rem;
+    margin-top: 8px;
+}
+
+label:has(input[type=radio]) {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    cursor: pointer;
+}
+
+label:has(input[type=radio]):hover {
+    border-color: var(--Medium-Green);
+}
+
+label:has(input[type=radio]:checked) {
+    border-color: var(--Medium-Green);
+    background-color: var(--Light-Green);
+}
+
+.input-box {
+    border: 1px solid var(--Medium-Grey);
+    border-radius: 8px;
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 1.125rem;
+    color: var(--Dark-Grey);
+    margin-top: 8px;
+}
+
+input[type=radio],
+input[type=checkbox] {
+    accent-color: var(--Medium-Green);
+    width: 1.125rem;
+    height: 1.125rem;
+}
+
+textarea {
+    height: 14rem;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 40px;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--Medium-Green);
+    color: var(--White);
+    font-weight: 700;
+    font-size: 1.125rem;
+    cursor: pointer;
+}
+
+@media (min-width: 32rem) {
+    .container {
+        padding: 40px;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 16px;
+    }
+    textarea {
+        height: 8.5rem;
+    }
+}
