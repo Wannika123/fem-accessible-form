@@ -5,7 +5,7 @@
     padding: 24px;
     border-radius: 12px;
     width: 327px;
-    animation: slide-down-and-up 3.5s ease-in-out;
+    animation: slide-down-and-up 4.5s ease-in-out;
     animation-fill-mode: forwards;
 }
 

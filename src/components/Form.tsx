@@ -14,7 +14,7 @@ const INITIAL_DATA = {
 export type KeyNames = keyof typeof INITIAL_DATA
 
 type ErrMessageType = {
-    [index in KeyNames]: string
+    [index in KeyNames]: string | boolean
 }
 
 const ERR_MESSAGES: ErrMessageType = {
@@ -36,7 +36,7 @@ export default function Form({ setSubmitted }: FormProps) {
     const [formData, setFormData] = useState(INITIAL_DATA);
     const [errMessage, setErrMessage] = useState<ErrMessageType>(() => {
         const value = keys.reduce((obj: any, key) => {
-            obj[key] = ''
+            obj[key] = false
             return obj
         }, {})
         return value
@@ -49,7 +49,7 @@ export default function Form({ setSubmitted }: FormProps) {
         // remove error message if the input value is valid
         if (errMessage[key] && validateValues(value, key)) {    
             setErrMessage(state => ({
-                ...state, [key]: ''
+                ...state, [key]: false
             }))
         }  
 
@@ -64,7 +64,7 @@ export default function Form({ setSubmitted }: FormProps) {
     ) => {
         if (!validateValues(value, key)) {  
             setErrMessage(state => ({
-                ...state, [key]: ERR_MESSAGES[key]
+                ...state, [key]: true
             }))
         }
     }
@@ -85,7 +85,7 @@ export default function Form({ setSubmitted }: FormProps) {
                 let newState = {...state};
                 for (let i = 0; i < invalidInputKeys.length; i++) {
                     const key = invalidInputKeys[i]
-                    newState = {...newState, [key]: ERR_MESSAGES[key] }
+                    newState = {...newState, [key]: true }
                 }
                 return newState
             })
@@ -121,13 +121,13 @@ export default function Form({ setSubmitted }: FormProps) {
                                 name='first-name'
                                 value={formData.firstName}
                                 autoComplete='given-name'   
-                                aria-invalid={errMessage.firstName !== '' ? 'true' : 'false'}
+                                aria-invalid={errMessage.firstName ? 'true' : 'false'}
                                 aria-describedby='first-name-err'
                                 onChange={e => handleChange('firstName', e.target.value)}
                                 onBlur={e => handleBlur('firstName', e.target.value)}
                                 required
                             />
-                            { errMessage.firstName !== '' && <div id='first-name-err' className='err-message'>{errMessage.firstName}</div> }
+                            { errMessage.firstName && <div id='first-name-err' className='err-message'>{ERR_MESSAGES.firstName}</div> }
                         </div>
                         <div className='input-container'>
                             <label htmlFor='last-name' className='label'>Last Name <span className='star' aria-hidden="true">*</span></label>
@@ -138,13 +138,13 @@ export default function Form({ setSubmitted }: FormProps) {
                                 name='last-name'
                                 value={formData.lastName}
                                 autoComplete='family-name'
-                                aria-invalid={errMessage.lastName !== '' ? 'true' : 'false'}
+                                aria-invalid={errMessage.lastName ? 'true' : 'false'}
                                 aria-describedby='last-name-err'
                                 onChange={e => handleChange('lastName', e.target.value)}
                                 onBlur={e => handleBlur('lastName', e.target.value)}
                                 required
                             />
-                            { errMessage.lastName !== '' && <div id='last-name-err' className='err-message'>{errMessage.lastName}</div> }
+                            { errMessage.lastName && <div id='last-name-err' className='err-message'>{ERR_MESSAGES.lastName}</div> }
                         </div>
                     </div>
                     <div className='input-container'>
@@ -156,13 +156,13 @@ export default function Form({ setSubmitted }: FormProps) {
                             name='email'
                             value={formData.email}
                             autoComplete='email'
-                            aria-invalid={errMessage.email !== '' ? 'true' : 'false'}
+                            aria-invalid={errMessage.email ? 'true' : 'false'}
                             aria-describedby='email-err'
                             onChange={e => handleChange('email', e.target.value)}
                             onBlur={e => handleBlur('email', e.target.value)}
                             required
                         />
-                        { errMessage.email !== '' && <div id='email-err' className='err-message'>{errMessage.email}</div> }
+                        { errMessage.email && <div id='email-err' className='err-message'>{ERR_MESSAGES.email}</div> }
                     </div>
                 </fieldset>
 
@@ -191,7 +191,7 @@ export default function Form({ setSubmitted }: FormProps) {
                             />
                             Support Request
                         </label>
-                        { errMessage.queryType !== '' && <div id='query-type-err' className='err-message'>{errMessage.queryType}</div> }
+                        { errMessage.queryType && <div id='query-type-err' className='err-message'>{ERR_MESSAGES.queryType}</div> }
                     </div>
                     
                 </fieldset>
@@ -204,13 +204,13 @@ export default function Form({ setSubmitted }: FormProps) {
                             id='message'
                             name='mesage'
                             value={formData.message}
-                            aria-invalid={errMessage.message !== '' ? 'true' : 'false'}
+                            aria-invalid={errMessage.message ? 'true' : 'false'}
                             aria-describedby='textarea-err'
                             onChange={e => handleChange('message', e.target.value)}
                             onBlur={e => handleBlur('message', e.target.value)}
                             required
                         ></textarea>
-                        { errMessage.message !== '' && <div id='textarea-err' className='err-message'>{errMessage.message}</div> }
+                        { errMessage.message && <div id='textarea-err' className='err-message'>{ERR_MESSAGES.message}</div> }
                     </div>
                 </fieldset>
 
@@ -226,7 +226,7 @@ export default function Form({ setSubmitted }: FormProps) {
                         />
                         <label htmlFor='consent' className='label'>I consent to being contacted by the team <span className='star' aria-hidden="true">*</span></label>
                     </div>
-                    { errMessage.consent !== '' && <div id='consent-err' className='err-message'>{errMessage.consent}</div> }
+                    { errMessage.consent && <div id='consent-err' className='err-message'>{ERR_MESSAGES.consent}</div> }
                 </div>
 
                 <button className='submit-btn' type='submit' onClick={checkCompletion}>Submit</button>

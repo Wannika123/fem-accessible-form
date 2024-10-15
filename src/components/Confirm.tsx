@@ -8,12 +8,10 @@ type ConfirmProps = {
 
 export default function Confirm({ setSubmitted }: ConfirmProps) {
 
-    function delay(time: number) {
-        return new Promise(resolve => setTimeout(resolve, time));
-    }
-
     useEffect(() => {
-        delay(4000).then(() => setSubmitted(false))                  
+        setTimeout(() => {
+            setSubmitted(false)
+        }, 5000)                
     }, [])
 
     return (
